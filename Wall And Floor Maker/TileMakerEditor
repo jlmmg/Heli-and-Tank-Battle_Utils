@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+[CustomEditor(typeof(TileMaker))]
+public class TileMakerEditor : Editor{
+    private TileMaker tileMaker = null;
+   public override void OnInspectorGUI(){
+    
+        base.OnInspectorGUI();
+
+        GUILayout.BeginHorizontal();
+
+        if (GUILayout.Button("Refresh")){
+            tileMaker.Refresh();
+        }
+        //
+            
+        GUILayout.EndHorizontal();
+
+        EditorGUI.BeginChangeCheck();
+        var count = tileMaker.count;
+        var dirType = (DirType)EditorGUILayout.EnumPopup(new GUIContent("Direction Type", "Determines which direction to use for Instantiate duplicates."), tileMaker.dirType);
+        if (tileMaker.dirType == DirType.X){
+            //
+        }else if (tileMaker.dirType == DirType.Z){
+            //
+        }else{
+            //
+        }
+        //count = EditorGUILayout.DelayedIntField(new GUIContent("Count", "Determines how many duplicates will get created."), tileMaker.count);
+    }
+    private void Awake(){
+            tileMaker = target as TileMaker;
+        }
+        
+}
+#endif
